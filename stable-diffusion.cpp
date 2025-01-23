@@ -1543,6 +1543,16 @@ sd_image_t* txt2img(sd_ctx_t* sd_ctx,
         return NULL;
     }
 
+    if (batch_count <= 0) {
+        LOG_ERROR("batch_count must be greater than 0");
+        return NULL;
+    }
+
+    if (sample_steps <= 0) {
+        LOG_ERROR("sample_steps must be greater than 0");
+        return NULL;
+    }
+
     struct ggml_init_params params;
     params.mem_size = static_cast<size_t>(10 * 1024 * 1024);  // 10 MB
     if (sd_version_is_sd3(sd_ctx->sd->version)) {
